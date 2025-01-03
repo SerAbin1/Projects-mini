@@ -1,10 +1,10 @@
 //fucntion to return "rock", "paper", or "scissors" randomly
 function getComputerChoice() {
-    const choice = (Math.random() * 10) + 1;
-    if (choice > 7) {
+    const choice = (Math.random() * 3) + 1;
+    if (choice == 1) {
         return "rock";
     }
-    else if(choice > 4) {
+    else if(choice == 2) {
         return "paper";
     }
     else {
@@ -15,20 +15,17 @@ function getComputerChoice() {
 //function to get the human choice
 function getHumanChoice() {
     const choice = Number(prompt("Enter your choice: 1 for rock, 2 for paper, 3 for scissors"));
-    if (choice == 1) {
-        return "rock";
-    }if (choice == 2) {
-        return "paper";
-    }if (choice == 3) {
-        return "scissors";
-    }
+    if (choice == 1) return "rock";
+    if (choice == 2) return "paper";
+    if (choice == 3) return "scissors";
+    console.log("Invalid choice! Defaulting to rock.");
+    return "rock";
 }
 
 let humanScore = 0;
 let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
-  humanChoice = humanChoice.toLowerCase();
   if (humanChoice == "rock") {
       if (computerChoice == "paper") {
           console.log("You lose! Paper beats rock.");
@@ -56,7 +53,7 @@ function playRound(humanChoice, computerChoice) {
       }
       if (computerChoice == "rock") {
           console.log("You lose! Rock beats scissors.");
-          humanScore++;
+          computerScore++;
       }
   }
 }
@@ -71,11 +68,16 @@ function playGame() {
         playRound(humanSelection, computerSelection);
         i++;
     }
+    console.log(`Your score: ${humanScore}\nComputer score: ${computerScore}`);
+
     if (humanScore > computerScore) {
         console.log("You win!");
     }
-    else {
+    else if (computerScore > humanScore) {
         console.log("You lose!");
+    }
+    else {
+        console.log("It's a draw!");
     }
 }
 
