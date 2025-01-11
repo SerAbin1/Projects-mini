@@ -1,6 +1,6 @@
 //fucntion to return "rock", "paper", or "scissors" randomly
 function getComputerChoice() {
-    const choice = (Math.random() * 3) + 1;
+    const choice = Math.floor(Math.random() * 3) + 1;
     if (choice == 1) {
         return "rock";
     }
@@ -12,73 +12,86 @@ function getComputerChoice() {
     }
 }
 
-//function to get the human choice
-function getHumanChoice() {
-    const choice = Number(prompt("Enter your choice: 1 for rock, 2 for paper, 3 for scissors"));
-    if (choice == 1) return "rock";
-    if (choice == 2) return "paper";
-    if (choice == 3) return "scissors";
-    console.log("Invalid choice! Defaulting to rock.");
-    return "rock";
-}
-
 let humanScore = 0;
 let computerScore = 0;
 
+//Decide who wins and increment tye corresponding score
 function playRound(humanChoice, computerChoice) {
   if (humanChoice == "rock") {
       if (computerChoice == "paper") {
-          console.log("You lose! Paper beats rock.");
+          div.textContent = "You lose! Paper beats rock.";
           computerScore++;
       }
       if (computerChoice == "scissors") {
-          console.log("You win! Rock beats scissors.");
+          div.textContent = "You win! Rock beats scissors.";
           humanScore++;
       }
   }
     if (humanChoice == "paper") {
       if (computerChoice == "rock") {
-          console.log("You win! Paper beats rock.");
+          div.textContent = "You win! Paper beats rock.";
           humanScore++;
       }
       if (computerChoice == "scissors") {
-          console.log("You lose! Paper loses to scissors.");
+          div.textContent = "You lose! Paper loses to scissors.";
           computerScore++;
       }
   }
     if (humanChoice == "scissors") {
       if (computerChoice == "paper") {
-          console.log("You win! Scissors beats paper.");
+          div.textContent = "You win! Scissors beats paper.";
           humanScore++;
       }
       if (computerChoice == "rock") {
-          console.log("You lose! Rock beats scissors.");
+          div.textContent = "You lose! Rock beats scissors.";
           computerScore++;
       }
   }
 }
 
+const rock = document.createElement("button");
+const paper = document.createElement("button");
+const scissors = document.createElement("button");
 
+rock.textContent = "Rock";
+paper.textContent = "Paper";
+scissors.textContent = "Scissors";
 
-function playGame() {
-    let i = 0;
-    while (i < 5) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-        i++;
-    }
-    console.log(`Your score: ${humanScore}\nComputer score: ${computerScore}`);
+rock.style.margin = "100% 15px 0px 18%";
+paper.style.margin = "15px";
+scissors.style.margin = "15px";
 
-    if (humanScore > computerScore) {
-        console.log("You win!");
-    }
-    else if (computerScore > humanScore) {
-        console.log("You lose!");
-    }
-    else {
-        console.log("It's a draw!");
-    }
-}
+document.body.appendChild(rock);
+document.body.appendChild(paper);
+document.body.appendChild(scissors);
 
-playGame();
+const div = document.createElement("div");
+document.body.appendChild(div);
+
+let previousButton;
+
+document.body.addEventListener("click", function(event) {
+    if (previousButton) {
+        previousButton.style.backgroundColor = "";
+    }   
+    event.target.style.backgroundColor = "green";
+    previousButton = event.target;
+    switch(event.target.textContent){
+        case "Rock":
+            playRound("rock", getComputerChoice());
+            break;
+        case "Paper":
+            playRound("paper", getComputerChoice());
+            break;
+        case "Scissors":
+            playRound("scissors", getComputerChoice());
+            break;
+    }
+   
+    if (humanScore > 4) {
+        div.innerHTML = `You win!<br>Your score: ${humanScore}<br>Computer score: ${computerScore}`;
+    }
+    else if (computerScore > 4) {
+    div.innerHTML = `You lose!<br>Your score: ${humanScore}<br>Computer score: ${computerScore}`;
+    }
+});
