@@ -1,6 +1,6 @@
 html{
     font-size: 16px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', 'Times New Roman', sans-serif;
 }
 
 h1{
@@ -19,12 +19,21 @@ h1{
 }
 
 .Calculator .display{
-    width: 50%;
+    width: 60%;
     height: 50px;
     text-align: right;
     margin: 0 25px 0 25px;
     padding: 5px;
-    border: solid 1px black;
+    border: solid 1px rgb(215, 197, 231);
+}
+
+.result{
+    width: 60%;
+    height: 20px;
+    text-align: right;
+    margin: 0 25px 0 25px;
+    padding: 5px;
+    border: solid 1px rgb(179, 124, 227);
 }
 
 .Calculator button{

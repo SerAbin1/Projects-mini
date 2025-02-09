@@ -4,6 +4,7 @@ let operand2 = '';
 let res;
 
 const display = document.querySelector('.display');
+const result = document.querySelector('.result');
 
 const calculator = document.querySelector('.Calculator');
 calculator.addEventListener('click', operate);
@@ -12,10 +13,10 @@ function operate(e) {
     const buttonText = e.target.textContent;
     if (!isNaN(buttonText) || buttonText === '.') {
         operand1 += buttonText;
-        display.textContent = operand1;
+        display.textContent += operand1;
     } else if (buttonText === '+' || buttonText === '-' || buttonText === 'x' || buttonText === '/') {
         operator = buttonText === 'x' ? '*' : buttonText;
-        display.textContent = operator;
+        display.textContent += operator;
         operand2 = operand1;
         operand1 = '';
     } else if (buttonText === '=') {
@@ -35,12 +36,13 @@ function operate(e) {
                 res = divide(num1, num2);
                 break;
         }
-        display.textContent = res;
+        result.textContent = res;
         operand1 = res;
         operand2 = '';
         operator = '';
     } else if (buttonText === 'AC'){
         display.textContent = '';
+        result.textContent = '';
         operand1 = '';
         operand2 = '';
         operator = '';
