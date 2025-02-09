@@ -1,51 +1,53 @@
-let operand1;
+let operand1 = '';
 let operator;
-let operand2;
+let operand2 = '';
 let res;
 
 const display = document.querySelector('.display');
-
 
 const calculator = document.querySelector('.Calculator');
 calculator.addEventListener('click', operate);
 
 function operate(e) {
     const buttonText = e.target.textContent;
-    operand1 += buttonText;
-    if (buttonText === '+' || buttonText === '-' || buttonText === '*' || buttonText === '/') {
-        operator = buttonText;
-        operand1 = operand1.slice(0, -1);
+    if (!isNaN(buttonText) || buttonText === '.') {
+        operand1 += buttonText;
+        display.textContent = operand1;
+    } else if (buttonText === '+' || buttonText === '-' || buttonText === 'x' || buttonText === '/') {
+        operator = buttonText === 'x' ? '*' : buttonText;
         operand2 = operand1;
         operand1 = '';
-    }
-    if (buttonText === '=') {
+    } else if (buttonText === '=') {
+        const num1 = Number(operand2);
+        const num2 = Number(operand1);
         switch(operator){
             case '+':
-                res = add(operand2, operand1);
-                display.textContent = res;
+                res = add(num1, num2);
                 break;
             case '*':
-                multiply(operand2, operand1);
+                res = multiply(num1, num2);
                 break;
             case '-':
-                subtract(operand2, operand1);
+                res = subtract(num1, num2);
                 break;
             case '/':
-                divide(operand2, operand1);
+                res = divide(num1, num2);
                 break;
         }
-    }
-    if (buttonText === 'AC'){
+        display.textContent = res;
+        operand1 = res;
+        operand2 = '';
+        operator = '';
+    } else if (buttonText === 'AC'){
         display.textContent = '';
-            operand1 = '';
-            operand2 = '';
-            operator = '';
+        operand1 = '';
+        operand2 = '';
+        operator = '';
     }
 }
 
 function add(a, b) {
-
-    return Number(a) + Number(b);
+    return a + b;
 }
 
 function multiply(a, b) {
