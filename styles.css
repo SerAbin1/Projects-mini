@@ -1,0 +1,14 @@
+.Calculator{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.Calculator button{
+    padding: 7px;
+    width: 50px;
+    background-color: rgb(245, 193, 98);
+}
