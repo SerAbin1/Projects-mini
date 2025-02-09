@@ -1,3 +1,14 @@
+html{
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+}
+
+h1{
+    text-align: center;
+    margin-top: 0;
+    background-color: rgb(215, 197, 231);
+}
+
 .Calculator{
     display: flex;
     flex-direction: column;
@@ -5,6 +16,15 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.Calculator .display{
+    width: 50%;
+    height: 50px;
+    text-align: right;
+    margin: 0 25px 0 25px;
+    padding: 5px;
+    border: solid 1px black;
 }
 
 .Calculator button{
