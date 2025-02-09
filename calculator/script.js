@@ -15,6 +15,7 @@ function operate(e) {
         display.textContent = operand1;
     } else if (buttonText === '+' || buttonText === '-' || buttonText === 'x' || buttonText === '/') {
         operator = buttonText === 'x' ? '*' : buttonText;
+        display.textContent = operator;
         operand2 = operand1;
         operand1 = '';
     } else if (buttonText === '=') {
