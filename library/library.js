@@ -15,7 +15,8 @@ function addBookToLibrary(title, author, pages, read) {
 
 function displayBooks(myLibrary) {
     myLibrary.forEach(book => {
-        console.log(book);
+        bookContainer.innerHTML += book;
+        //console.log(book);
     });
 }
 
@@ -47,3 +48,8 @@ form.addEventListener("submit", (e) => {
 
     form.reset();
 });
+
+function addBookToLibrary(title, author, pages, read) {
+    let book = new Book(title, author, pages, read);
+    myLibrary.push(book);
+}
