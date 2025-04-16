@@ -57,10 +57,11 @@ module.exports = function (app) {
         res.type('txt').send(data.toString());
       });
     });
-
+    
+  var error;
   app.get('/_api/get-tests', cors(), function(req, res, next){
-    console.log('requested');
-    if(process.env.NODE_ENV === 'test') return next();
+    console.log(error);
+    if(!error && process.env.NODE_ENV === 'test') return next();
     res.json({status: 'unavailable'});
   },
   function(req, res, next){
@@ -73,7 +74,12 @@ module.exports = function (app) {
     });
   });
   app.get('/_api/app-info', function(req, res) {
-    res.json({ headers: res.getHeaders()});
+    var hs = Object.keys(res._headers)
+      .filter(h => !h.match(/^access-control-\w+/));
+    var hObj = {};
+    hs.forEach(h => {hObj[h] = res._headers[h]});
+    delete res._headers['strict-transport-security'];
+    res.json({headers: hObj});
   });
   
 };
